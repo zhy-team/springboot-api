@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <!-- 日志存放路径 -->
-	<property name="log.path" value="/home/ruoyi/logs" />
+	<property name="log.path" value="d:/zhyazyh/logs" />
     <!-- 日志输出格式 -->
 	<property name="log.pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger - [%method,%line] - %msg%n" />
 
@@ -70,6 +70,21 @@
             <pattern>${log.pattern}</pattern>
         </encoder>
     </appender>
+
+
+    <appender name="alipay" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${log.path}/alipay.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${log.path}/alipay.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <MaxHistory>60</MaxHistory>
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <MaxFileSize>5MB</MaxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>${log.pattern}</Pattern>
+        </encoder>
+    </appender>
 	
 	<!-- 系统模块日志级别控制  -->
 	<logger name="com.ruoyi" level="info" />
@@ -89,5 +104,9 @@
 	<!--系统用户操作日志-->
     <logger name="sys-user" level="info">
         <appender-ref ref="sys-user"/>
+    </logger>
+
+    <logger name="ali_pay" level="DEBUG" additivity="false">
+        <appender-ref ref="alipay"/>
     </logger>
 </configuration> 

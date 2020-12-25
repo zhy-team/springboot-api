@@ -59,7 +59,7 @@ spring:
   # redis 配置
   redis:
     # 地址
-    host: 192.168.31.60
+    host: 127.0.0.1
     # 端口，默认为6379
     port: 6379
     # 密码
@@ -117,3 +117,10 @@ xss:
   excludes: /system/notice/*
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
+
+alipay:
+  appId: 2016080200148359
+  notifyUrl: http://124.93.222.95/
+  bill:
+    #支付宝对账文件存放位置
+    path: D:/alipay/bill

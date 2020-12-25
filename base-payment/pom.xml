@@ -3,24 +3,24 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>com.zhyazyh</groupId>
         <artifactId>zhyazyh</artifactId>
+        <groupId>com.zhyazyh</groupId>
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ruoyi-generator</artifactId>
+    <artifactId>base-payment</artifactId>
 
     <description>
-        generator代码生成
+        支付接口服务
     </description>
 
     <dependencies>
-
-        <!--velocity代码生成使用模板 -->
+        <!--支付宝新版sdk-->
         <dependency>
-            <groupId>org.apache.velocity</groupId>
-            <artifactId>velocity</artifactId>
+            <groupId>com.alipay.sdk</groupId>
+            <artifactId>alipay-easysdk</artifactId>
+            <version>2.1.2</version>
         </dependency>
 
         <!-- 通用工具-->
@@ -28,7 +28,5 @@
             <groupId>com.zhyazyh</groupId>
             <artifactId>ruoyi-common</artifactId>
         </dependency>
-
     </dependencies>
-
 </project>

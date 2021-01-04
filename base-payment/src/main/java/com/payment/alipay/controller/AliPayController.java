@@ -33,11 +33,14 @@ public class AliPayController {
         try {
             AlipayTradeCreateResponse alipayTradeCreateResponse = Factory.Payment.Common().create(payInfo.getSubject(), PayUtils.getNumberForPK(), payInfo.getAmount().toString(), payInfo.getBuyerId());
             if (ResponseChecker.success(alipayTradeCreateResponse)) {
-
+                //支付宝交易号
+                log.debug("支付宝交易号{}",alipayTradeCreateResponse.getTradeNo());
+                //商户订单号
+                log.debug("商户订单号{}",alipayTradeCreateResponse.getOutTradeNo());
                 return AjaxResult.success("创建交易成功");
             } else {
                 log.error("支付宝创建交易失败{},{},{},{}", alipayTradeCreateResponse.getCode(), alipayTradeCreateResponse.getMsg(),alipayTradeCreateResponse.getSubCode(),alipayTradeCreateResponse.getSubMsg());
-                return AjaxResult.error("支付宝创建交易失败");
+                return AjaxResult.error(alipayTradeCreateResponse.getSubMsg());
             }
 
         } catch (Exception e) {

@@ -45,7 +45,7 @@ public class BillDownloadController {
                 return AjaxResult.success("支付宝获取账单成功");
             } else {
                 log.error("支付宝账单下载失败{},{},{},{}", billResponse.getCode(), billResponse.getMsg(),billResponse.getSubCode(),billResponse.getSubMsg());
-                return AjaxResult.error("支付宝账单下载失败");
+                return AjaxResult.error(billResponse.getSubMsg());
             }
         } catch (Exception e) {
             log.error("支付宝下载对账单异常", e);

@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  * @Date: create in 2021/1/4 15:15
  */
 
-public class AliPayInfo {
+public class AliCreatePayInfo {
 
 
     @DecimalMin(value = "0.01" , message = "交易价格最小值不能小于0.01")

@@ -19,7 +19,7 @@ public class AliCreatePayInfo {
     @NotBlank(message = "交易主题不能为空")
     private String subject;
 
-    @Size(min = 0,max = 28,message = "buyerId长度不合法")
+    @Size(min = 1,max = 28,message = "buyerId长度不合法")
     private String buyerId;
 
     public BigDecimal getAmount() {

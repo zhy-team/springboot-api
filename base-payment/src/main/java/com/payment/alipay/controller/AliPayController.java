@@ -1,6 +1,5 @@
 package com.payment.alipay.controller;
 
-import com.alipay.easysdk.base.oauth.models.AlipaySystemOauthTokenResponse;
 import com.alipay.easysdk.factory.Factory;
 import com.alipay.easysdk.kernel.util.ResponseChecker;
 import com.alipay.easysdk.payment.common.models.AlipayTradeCreateResponse;
@@ -24,7 +23,7 @@ import javax.validation.Valid;
  */
 
 @RestController
-@RequestMapping("/payment/alipay")
+@RequestMapping("/payment/alipay/pay")
 public class AliPayController {
 
     private static final Logger log = LoggerFactory.getLogger("ali_pay");

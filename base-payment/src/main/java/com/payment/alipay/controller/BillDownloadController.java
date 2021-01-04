@@ -21,7 +21,7 @@ import javax.validation.Valid;
  */
 
 @RestController
-@RequestMapping("/payment/alipay")
+@RequestMapping("/payment/alipay/bill")
 public class BillDownloadController {
     private static final Logger log = LoggerFactory.getLogger("ali_pay");
 

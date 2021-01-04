@@ -118,6 +118,8 @@ xss:
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
 
+
+#支付宝支付相关配置
 alipay:
   appId: 2016080200148359
   notifyUrl: http://124.93.222.95/

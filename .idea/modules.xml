@@ -2,8 +2,14 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/demo.iml" filepath="$PROJECT_DIR$/demo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/zyh-boot-config/zyh-boot-config.iml" filepath="$PROJECT_DIR$/zyh-boot-config/zyh-boot-config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/base-payment/base-payment.iml" filepath="$PROJECT_DIR$/base-payment/base-payment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/baseframwork.iml" filepath="$PROJECT_DIR$/baseframwork.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ruoyi-admin/ruoyi-admin.iml" filepath="$PROJECT_DIR$/ruoyi-admin/ruoyi-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ruoyi-common/ruoyi-common.iml" filepath="$PROJECT_DIR$/ruoyi-common/ruoyi-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ruoyi-framework/ruoyi-framework.iml" filepath="$PROJECT_DIR$/ruoyi-framework/ruoyi-framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ruoyi-generator/ruoyi-generator.iml" filepath="$PROJECT_DIR$/ruoyi-generator/ruoyi-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ruoyi-quartz/ruoyi-quartz.iml" filepath="$PROJECT_DIR$/ruoyi-quartz/ruoyi-quartz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ruoyi-system/ruoyi-system.iml" filepath="$PROJECT_DIR$/ruoyi-system/ruoyi-system.iml" />
     </modules>
   </component>
 </project>

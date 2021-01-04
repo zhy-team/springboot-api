@@ -1,4 +1,4 @@
-package com.payment.alipay;
+package com.payment.alipay.config;
 
 public class Contants {
     //请填写您的AppId
@@ -17,8 +17,6 @@ public class Contants {
     public static final String alipayCertPath="";
     //支付宝根证书文件路径
     public static final String alipayRootCertPath="";
-
-
 
     public static final String protocol="https";
 

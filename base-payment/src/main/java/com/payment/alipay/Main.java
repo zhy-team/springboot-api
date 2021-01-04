@@ -6,7 +6,7 @@ import com.alipay.easysdk.kernel.Config;
 import com.alipay.easysdk.kernel.util.ResponseChecker;
 import com.alipay.easysdk.payment.common.models.AlipayDataDataserviceBillDownloadurlQueryResponse;
 import com.alipay.easysdk.payment.common.models.AlipayTradeCreateResponse;
-import com.payment.alipay.Contants;
+import com.payment.alipay.config.Contants;
 
 public class Main {
     public static void main(String[] args) throws Exception {

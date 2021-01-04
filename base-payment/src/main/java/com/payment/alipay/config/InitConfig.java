@@ -1,12 +1,7 @@
 package com.payment.alipay.config;
 
-import com.payment.alipay.Contants;
-import com.alipay.easysdk.factory.Factory;
-import com.alipay.easysdk.kernel.Config;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 /**
  * @Author: zhanghuiyu

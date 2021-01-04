@@ -2,8 +2,6 @@ package com.payment.alipay.config;
 
 import com.alipay.easysdk.factory.Factory;
 import com.alipay.easysdk.kernel.Config;
-import com.payment.alipay.Contants;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,10 +12,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PayInit {
-
-    @Autowired
-    InitConfig initConfig;
-
     public PayInit(){
         Factory.setOptions(getOptions());
     }
@@ -27,11 +21,11 @@ public class PayInit {
         config.protocol = Contants.protocol;
         config.gatewayHost = Contants.gatewayHost;
         config.signType = Contants.signType;
-        config.appId = initConfig.getAppId();
+        config.appId = Contants.appId;
         config.merchantPrivateKey = Contants.merchantPrivateKey;
         config.encryptKey = Contants.encryptKey;
         config.alipayPublicKey=Contants.alipayPublicKey;
-        config.notifyUrl = initConfig.getNotifyUrl();
+        config.notifyUrl = Contants.notifyUrl;
         return config;
     }
 

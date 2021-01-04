@@ -1,4 +1,4 @@
-package com.payment.alipay.bill;
+package com.payment.utils;
 
 import java.io.*;
 import java.net.HttpURLConnection;

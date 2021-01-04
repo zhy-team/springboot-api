@@ -3,11 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.ruoyi</groupId>
-    <artifactId>ruoyi</artifactId>
-    <version>3.3.0</version>
-    <name>ruoyi</name>
-    <description>若依管理系统</description>
+    <groupId>com.zhyazyh</groupId>
+    <artifactId>zhyazyh</artifactId>
+    <version>1.0.0</version>
+    <name>zhyazyh</name>
 
     <modules>
         <module>ruoyi-admin</module>
@@ -16,11 +15,13 @@
         <module>ruoyi-quartz</module>
         <module>ruoyi-generator</module>
         <module>ruoyi-common</module>
+        <module>base-payment</module>
     </modules>
 
     <packaging>pom</packaging>
 
     <properties>
+        <zhyazyh.version>1.0.0</zhyazyh.version>
         <ruoyi.version>3.3.0</ruoyi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -169,38 +170,46 @@
 
             <!-- 定时任务-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
+                <groupId>com.zhyazyh</groupId>
                 <artifactId>ruoyi-quartz</artifactId>
-                <version>${ruoyi.version}</version>
+                <version>${zhyazyh.version}</version>
             </dependency>
 
             <!-- 代码生成-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
+                <groupId>com.zhyazyh</groupId>
                 <artifactId>ruoyi-generator</artifactId>
-                <version>${ruoyi.version}</version>
+                <version>${zhyazyh.version}</version>
             </dependency>
 
             <!-- 核心模块-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
+                <groupId>com.zhyazyh</groupId>
                 <artifactId>ruoyi-framework</artifactId>
-                <version>${ruoyi.version}</version>
+                <version>${zhyazyh.version}</version>
             </dependency>
 
             <!-- 系统模块-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
+                <groupId>com.zhyazyh</groupId>
                 <artifactId>ruoyi-system</artifactId>
-                <version>${ruoyi.version}</version>
+                <version>${zhyazyh.version}</version>
             </dependency>
 
             <!-- 通用工具-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
+                <groupId>com.zhyazyh</groupId>
                 <artifactId>ruoyi-common</artifactId>
-                <version>${ruoyi.version}</version>
+                <version>${zhyazyh.version}</version>
             </dependency>
+
+
+            <dependency>
+                <groupId>com.zhyazyh</groupId>
+                <artifactId>base-payment</artifactId>
+                <version>${zhyazyh.version}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>

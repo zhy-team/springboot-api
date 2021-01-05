@@ -76,6 +76,7 @@ spring:
         max-active: 8
         # #连接池最大阻塞等待时间（使用负值表示没有限制）
         max-wait: -1ms
+  #签名配置
   security:
       #是否开启签名验证
       isOpen: false
@@ -88,6 +89,18 @@ spring:
         - /v2/api-docs
         - /webjars/springfox-swagger-ui
         - /csrf
+  #邮箱配置
+  mail:
+      host: smtp.qq.com
+      username: 174576384@qq.com
+      password: #*****  //授权码，注意这里不是直接填密码
+      default-encoding: UTF-8
+      properties:
+        mail.smtp.auth: true
+        mail.smtp.starttls.enable: true
+        mail.smtp.starttls.required: true
+        mail.smtp.ssl.enable: true
+        mail.display.sendmail: spring-boot-demo
 
 # token配置
 token:

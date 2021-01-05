@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
+import java.util.Map;
 
 /**
  * @Author: zhanghuiyu
@@ -12,7 +13,7 @@ import java.math.BigDecimal;
  */
 
 @Data
-public class AliCreatePayInfo {
+public class AliPayInfo {
 
 
     @DecimalMin(value = "0.01" , message = "交易价格最小值不能小于0.01")
@@ -24,4 +25,7 @@ public class AliCreatePayInfo {
 
     @Size(min = 1,max = 28,message = "buyerId长度不合法")
     private String buyerId;
+
+
+    private Map<String,Object> objectMap;
 }

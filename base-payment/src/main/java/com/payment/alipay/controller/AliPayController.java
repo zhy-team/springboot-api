@@ -4,14 +4,17 @@ import com.alipay.easysdk.factory.Factory;
 import com.alipay.easysdk.kernel.util.ResponseChecker;
 import com.alipay.easysdk.payment.common.models.AlipayTradeCreateResponse;
 import com.alipay.easysdk.payment.facetoface.models.AlipayTradePrecreateResponse;
-import com.payment.alipay.bean.AliCreatePayInfo;
+import com.payment.alipay.bean.AliPayInfo;
+import com.payment.alipay.service.AlipayService;
 import com.payment.utils.PayUtils;
 import com.ruoyi.common.annotation.RepeatSubmit;
 import com.ruoyi.common.core.domain.AjaxResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,6 +30,9 @@ import javax.validation.Valid;
 @RequestMapping("/payment/alipay/pay")
 public class AliPayController {
 
+    @Autowired
+    AlipayService alipayService;
+
     private static final Logger log = LoggerFactory.getLogger("ali_pay");
 
     /**
@@ -34,7 +40,7 @@ public class AliPayController {
      */
     @PostMapping("/createPay")
     @RepeatSubmit
-    public AjaxResult createPay(@Valid AliCreatePayInfo payInfo) {
+    public AjaxResult createPay(@Valid AliPayInfo payInfo) {
 
         try {
             AlipayTradeCreateResponse alipayTradeCreateResponse = Factory.Payment.Common().create(payInfo.getSubject(), PayUtils.getNumberForPK(), payInfo.getAmount().toString(), payInfo.getBuyerId());
@@ -65,10 +71,10 @@ public class AliPayController {
      */
     @PostMapping("/faceToFacePrecreate")
     @RepeatSubmit
-    public AjaxResult faceToFacePrecreate(@Valid AliCreatePayInfo payInfo) {
+    public AjaxResult faceToFacePrecreate(@RequestBody @Valid AliPayInfo payInfo) {
 
         try {
-            AlipayTradePrecreateResponse alipayTradePrecreateResponse = Factory.Payment.FaceToFace().preCreate(payInfo.getSubject(), PayUtils.getNumberForPK(), payInfo.getAmount().toString());
+            AlipayTradePrecreateResponse alipayTradePrecreateResponse = alipayService.getAlipayTradePrecreateResponse(payInfo);
             if (ResponseChecker.success(alipayTradePrecreateResponse)) {
                 log.debug("支付宝二维码地址{}", alipayTradePrecreateResponse.getQrCode());
                 return AjaxResult.success("当面付生成交易付款码成功", alipayTradePrecreateResponse.getQrCode());

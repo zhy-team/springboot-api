@@ -12,6 +12,14 @@ public class Main {
 
     /***
      *
+     * List<Object> goodsDetailList = new ArrayList<>();
+     * Map<String, Object> goodsDetail = new HashMap<>();
+     * goodsDetail.put("goods_id", "apple-01");
+     * goodsDetail.put("goods_name", "Apple iPhone11 128G");
+     * goodsDetail.put("quantity", 1);
+     * goodsDetail.put("price", "5799.00");
+     * goodsDetailList.add(goodsDetail);
+     *
      *Factory.Payment.FaceToFace()
      *      // 调用optional扩展方法，完成可选业务参数（biz_content下的可选字段）的设置
      *      .optional("seller_id", "2088102146225135")
@@ -41,6 +49,33 @@ public class Main {
      *     // 调用agent扩展方法，设置app_auth_token，完成第三方代调用
      *     .agent("ca34ea491e7146cc87d25fca24c4cD11")
      *     .preCreate("Apple iPhone11 128G", "2234567890", "5799.00");
+     *
+     *
+     *
+     * 前端请求:
+     * {
+     * 	"amount":1000,
+     * 	"subject":"cece",
+     * 	"objectMap":{
+     * 		"asyncNotify":"http://ceshi.com/ss",
+     * 		"batchOptional":{
+     * 			"body":"2088102146225135",
+     * 			"goods_detail":[{
+     * 				"goods_id": "apple-01",
+     * 				"goods_name": "Apple iPhone11 128G"
+     *              },
+     *             {
+     * 				"goods_id": "apple-02",
+     * 				"goods_name": "Apple iPhone11 256G"
+     *            }]
+     *
+     *     }
+     *
+     *    }
+
+     * }
+     *
+     *
      */
     public static void main(String[] args) throws Exception {
         // 1. 设置参数（全局只需设置一次）

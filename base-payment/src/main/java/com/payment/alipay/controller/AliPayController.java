@@ -30,10 +30,8 @@ public class AliPayController {
     private static final Logger log = LoggerFactory.getLogger("ali_pay");
 
     /**
-     *
      * 通用创建交易
-     *
-     * */
+     */
     @PostMapping("/createPay")
     @RepeatSubmit
     public AjaxResult createPay(@Valid AliCreatePayInfo payInfo) {
@@ -42,12 +40,12 @@ public class AliPayController {
             AlipayTradeCreateResponse alipayTradeCreateResponse = Factory.Payment.Common().create(payInfo.getSubject(), PayUtils.getNumberForPK(), payInfo.getAmount().toString(), payInfo.getBuyerId());
             if (ResponseChecker.success(alipayTradeCreateResponse)) {
                 //支付宝交易号
-                log.debug("支付宝交易号{}",alipayTradeCreateResponse.getTradeNo());
+                log.debug("支付宝交易号{}", alipayTradeCreateResponse.getTradeNo());
                 //商户订单号
-                log.debug("商户订单号{}",alipayTradeCreateResponse.getOutTradeNo());
-                return AjaxResult.success("创建交易成功",alipayTradeCreateResponse.getTradeNo());
+                log.debug("商户订单号{}", alipayTradeCreateResponse.getOutTradeNo());
+                return AjaxResult.success("创建交易成功", alipayTradeCreateResponse.getTradeNo());
             } else {
-                log.error("支付宝创建交易失败{},{},{},{}", alipayTradeCreateResponse.getCode(), alipayTradeCreateResponse.getMsg(),alipayTradeCreateResponse.getSubCode(),alipayTradeCreateResponse.getSubMsg());
+                log.error("支付宝创建交易失败{},{},{},{}", alipayTradeCreateResponse.getCode(), alipayTradeCreateResponse.getMsg(), alipayTradeCreateResponse.getSubCode(), alipayTradeCreateResponse.getSubMsg());
                 return AjaxResult.error(alipayTradeCreateResponse.getSubMsg());
             }
 
@@ -61,12 +59,10 @@ public class AliPayController {
 
 
     /**
-     *
      * 面对面支付
-     *
+     * <p>
      * 生成交易付款码，待用户扫码付款
-     *
-     * */
+     */
     @PostMapping("/faceToFacePrecreate")
     @RepeatSubmit
     public AjaxResult faceToFacePrecreate(@Valid AliCreatePayInfo payInfo) {
@@ -74,10 +70,10 @@ public class AliPayController {
         try {
             AlipayTradePrecreateResponse alipayTradePrecreateResponse = Factory.Payment.FaceToFace().preCreate(payInfo.getSubject(), PayUtils.getNumberForPK(), payInfo.getAmount().toString());
             if (ResponseChecker.success(alipayTradePrecreateResponse)) {
-                log.debug("支付宝二维码地址{}",alipayTradePrecreateResponse.getQrCode());
-                return AjaxResult.success("当面付生成交易付款码成功",alipayTradePrecreateResponse.getQrCode());
-            }else{
-                log.error("当面付生成交易付款码{},{},{},{}", alipayTradePrecreateResponse.getCode(), alipayTradePrecreateResponse.getMsg(),alipayTradePrecreateResponse.getSubCode(),alipayTradePrecreateResponse.getSubMsg());
+                log.debug("支付宝二维码地址{}", alipayTradePrecreateResponse.getQrCode());
+                return AjaxResult.success("当面付生成交易付款码成功", alipayTradePrecreateResponse.getQrCode());
+            } else {
+                log.error("当面付生成交易付款码{},{},{},{}", alipayTradePrecreateResponse.getCode(), alipayTradePrecreateResponse.getMsg(), alipayTradePrecreateResponse.getSubCode(), alipayTradePrecreateResponse.getSubMsg());
                 return AjaxResult.error(alipayTradePrecreateResponse.getSubMsg());
             }
         } catch (Exception e) {

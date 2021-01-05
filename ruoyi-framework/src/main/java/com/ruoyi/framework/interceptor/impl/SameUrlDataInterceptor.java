@@ -40,7 +40,8 @@ public class SameUrlDataInterceptor extends RepeatSubmitInterceptor
      * 
      * 两次相同参数的请求，如果间隔时间大于该参数，系统不会认定为重复提交的数据
      */
-    private int intervalTime = 10;
+    @Value("${token.repeatTime}")
+    private int intervalTime;
 
     public void setIntervalTime(int intervalTime)
     {

@@ -6,6 +6,7 @@ import com.alipay.easysdk.payment.common.models.AlipayTradeCreateResponse;
 import com.alipay.easysdk.payment.facetoface.models.AlipayTradePrecreateResponse;
 import com.payment.alipay.bean.AliCreatePayInfo;
 import com.payment.utils.PayUtils;
+import com.ruoyi.common.annotation.RepeatSubmit;
 import com.ruoyi.common.core.domain.AjaxResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,7 @@ public class AliPayController {
      *
      * */
     @PostMapping("/createPay")
+    @RepeatSubmit
     public AjaxResult createPay(@Valid AliCreatePayInfo payInfo) {
 
         try {
@@ -43,7 +45,7 @@ public class AliPayController {
                 log.debug("支付宝交易号{}",alipayTradeCreateResponse.getTradeNo());
                 //商户订单号
                 log.debug("商户订单号{}",alipayTradeCreateResponse.getOutTradeNo());
-                return AjaxResult.success("创建交易成功");
+                return AjaxResult.success("创建交易成功",alipayTradeCreateResponse.getTradeNo());
             } else {
                 log.error("支付宝创建交易失败{},{},{},{}", alipayTradeCreateResponse.getCode(), alipayTradeCreateResponse.getMsg(),alipayTradeCreateResponse.getSubCode(),alipayTradeCreateResponse.getSubMsg());
                 return AjaxResult.error(alipayTradeCreateResponse.getSubMsg());
@@ -66,13 +68,14 @@ public class AliPayController {
      *
      * */
     @PostMapping("/faceToFacePrecreate")
+    @RepeatSubmit
     public AjaxResult faceToFacePrecreate(@Valid AliCreatePayInfo payInfo) {
 
         try {
             AlipayTradePrecreateResponse alipayTradePrecreateResponse = Factory.Payment.FaceToFace().preCreate(payInfo.getSubject(), PayUtils.getNumberForPK(), payInfo.getAmount().toString());
             if (ResponseChecker.success(alipayTradePrecreateResponse)) {
                 log.debug("支付宝二维码地址{}",alipayTradePrecreateResponse.getQrCode());
-                return AjaxResult.success("当面付生成交易付款码成功");
+                return AjaxResult.success("当面付生成交易付款码成功",alipayTradePrecreateResponse.getQrCode());
             }else{
                 log.error("当面付生成交易付款码{},{},{},{}", alipayTradePrecreateResponse.getCode(), alipayTradePrecreateResponse.getMsg(),alipayTradePrecreateResponse.getSubCode(),alipayTradePrecreateResponse.getSubMsg());
                 return AjaxResult.error(alipayTradePrecreateResponse.getSubMsg());

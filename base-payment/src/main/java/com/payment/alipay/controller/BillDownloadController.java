@@ -5,6 +5,7 @@ import com.payment.utils.BillUtils;
 import com.alipay.easysdk.factory.Factory;
 import com.alipay.easysdk.kernel.util.ResponseChecker;
 import com.alipay.easysdk.payment.common.models.AlipayDataDataserviceBillDownloadurlQueryResponse;
+import com.ruoyi.common.annotation.RepeatSubmit;
 import com.ruoyi.common.core.domain.AjaxResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +27,7 @@ public class BillDownloadController {
     private static final Logger log = LoggerFactory.getLogger("ali_pay");
 
     @GetMapping("/downloadBill")
+    @RepeatSubmit
     public AjaxResult downloadBill(@Valid AliPayBillInfo billInfo) {
         //账单日期格式：yyyy-MM-dd
         try {

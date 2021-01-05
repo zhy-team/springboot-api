@@ -1,5 +1,7 @@
 package com.payment.alipay.bean;
 
+import lombok.Data;
+
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
@@ -9,6 +11,7 @@ import java.math.BigDecimal;
  * @Date: create in 2021/1/4 15:15
  */
 
+@Data
 public class AliCreatePayInfo {
 
 
@@ -21,28 +24,4 @@ public class AliCreatePayInfo {
 
     @Size(min = 1,max = 28,message = "buyerId长度不合法")
     private String buyerId;
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getBuyerId() {
-        return buyerId;
-    }
-
-    public void setBuyerId(String buyerId) {
-        this.buyerId = buyerId;
-    }
 }

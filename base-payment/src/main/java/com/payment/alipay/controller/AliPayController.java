@@ -2,8 +2,13 @@ package com.payment.alipay.controller;
 
 import com.alipay.easysdk.factory.Factory;
 import com.alipay.easysdk.kernel.util.ResponseChecker;
+import com.alipay.easysdk.payment.app.Client;
+import com.alipay.easysdk.payment.app.models.AlipayTradeAppPayResponse;
 import com.alipay.easysdk.payment.common.models.AlipayTradeCreateResponse;
+import com.alipay.easysdk.payment.facetoface.models.AlipayTradePayResponse;
 import com.alipay.easysdk.payment.facetoface.models.AlipayTradePrecreateResponse;
+import com.alipay.easysdk.payment.page.models.AlipayTradePagePayResponse;
+import com.alipay.easysdk.payment.wap.models.AlipayTradeWapPayResponse;
 import com.payment.alipay.bean.AliPayInfo;
 import com.payment.alipay.service.AlipayService;
 import com.payment.utils.PayUtils;
@@ -43,13 +48,13 @@ public class AliPayController {
     public AjaxResult createPay(@Valid AliPayInfo payInfo) {
 
         try {
-            AlipayTradeCreateResponse alipayTradeCreateResponse = Factory.Payment.Common().create(payInfo.getSubject(), PayUtils.getNumberForPK(), payInfo.getAmount().toString(), payInfo.getBuyerId());
+            AlipayTradeCreateResponse alipayTradeCreateResponse = alipayService.getAlipayTradeCreateResponse(payInfo);
             if (ResponseChecker.success(alipayTradeCreateResponse)) {
                 //支付宝交易号
                 log.debug("支付宝交易号{}", alipayTradeCreateResponse.getTradeNo());
                 //商户订单号
                 log.debug("商户订单号{}", alipayTradeCreateResponse.getOutTradeNo());
-                return AjaxResult.success("创建交易成功", alipayTradeCreateResponse.getTradeNo());
+                return AjaxResult.success("创建交易成功", alipayTradeCreateResponse.toMap().toString());
             } else {
                 log.error("支付宝创建交易失败{},{},{},{}", alipayTradeCreateResponse.getCode(), alipayTradeCreateResponse.getMsg(), alipayTradeCreateResponse.getSubCode(), alipayTradeCreateResponse.getSubMsg());
                 return AjaxResult.error(alipayTradeCreateResponse.getSubMsg());
@@ -77,9 +82,9 @@ public class AliPayController {
             AlipayTradePrecreateResponse alipayTradePrecreateResponse = alipayService.getAlipayTradePrecreateResponse(payInfo);
             if (ResponseChecker.success(alipayTradePrecreateResponse)) {
                 log.debug("支付宝二维码地址{}", alipayTradePrecreateResponse.getQrCode());
-                return AjaxResult.success("当面付生成交易付款码成功", alipayTradePrecreateResponse.getQrCode());
+                return AjaxResult.success("当面付生成交易付款码成功", alipayTradePrecreateResponse.toMap().toString());
             } else {
-                log.error("当面付生成交易付款码{},{},{},{}", alipayTradePrecreateResponse.getCode(), alipayTradePrecreateResponse.getMsg(), alipayTradePrecreateResponse.getSubCode(), alipayTradePrecreateResponse.getSubMsg());
+                log.error("当面付生成交易付款码失败{},{},{},{}", alipayTradePrecreateResponse.getCode(), alipayTradePrecreateResponse.getMsg(), alipayTradePrecreateResponse.getSubCode(), alipayTradePrecreateResponse.getSubMsg());
                 return AjaxResult.error(alipayTradePrecreateResponse.getSubMsg());
             }
         } catch (Exception e) {
@@ -89,4 +94,97 @@ public class AliPayController {
         }
 
     }
+
+    /**
+     * 面对面支付
+     * <p>
+     * 扫用户出示的付款码，完成付款
+     */
+    @PostMapping("/faceToFacePay")
+    @RepeatSubmit
+    public AjaxResult faceToFacePay(@RequestBody @Valid AliPayInfo payInfo) {
+        try {
+            AlipayTradePayResponse alipayTradePayResponse = alipayService.getAlipayTradePayResponse(payInfo);
+            if (ResponseChecker.success(alipayTradePayResponse)) {
+                return AjaxResult.success("付款码交易成功", alipayTradePayResponse.toMap().toString());
+            } else {
+                log.error("付款码交易失败{},{},{},{}", alipayTradePayResponse.getCode(), alipayTradePayResponse.getMsg(), alipayTradePayResponse.getSubCode(), alipayTradePayResponse.getSubMsg());
+                return AjaxResult.error(alipayTradePayResponse.getSubMsg());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("付款码交易异常", e);
+            return AjaxResult.error(e.getMessage());
+        }
+    }
+
+    /**
+     * app生成订单串
+     *
+     * 再使用客户端 SDK 凭此串唤起支付宝收银台
+     */
+    @PostMapping("/appPay")
+    @RepeatSubmit
+    public AjaxResult appPay(@RequestBody @Valid AliPayInfo payInfo) {
+        try {
+            AlipayTradeAppPayResponse alipayTradeAppPayResponse = alipayService.getAlipayTradeAppPayResponse(payInfo);
+            if (ResponseChecker.success(alipayTradeAppPayResponse)) {
+                return AjaxResult.success("app生成订单串成功", alipayTradeAppPayResponse.getBody());
+            } else {
+                log.error("app生成订单串失败{}",alipayTradeAppPayResponse.getBody());
+                return AjaxResult.error(alipayTradeAppPayResponse.getBody());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("app生成订单串异常", e);
+            return AjaxResult.error(e.getMessage());
+        }
+    }
+
+    /**
+     * 电脑网站
+     *
+     * 生成交易表单，渲染后自动跳转支付宝网站引导用户完成支付
+     */
+    @PostMapping("/webPay")
+    @RepeatSubmit
+    public AjaxResult webPay(@RequestBody @Valid AliPayInfo payInfo) {
+        try {
+            AlipayTradePagePayResponse alipayTradePagePayResponse = alipayService.getAlipayTradePagePayResponse(payInfo);
+            if (ResponseChecker.success(alipayTradePagePayResponse)) {
+                return AjaxResult.success("电脑网站生成订单串成功", alipayTradePagePayResponse.getBody());
+            } else {
+                log.error("电脑网站生成订单串失败{}",alipayTradePagePayResponse.getBody());
+                return AjaxResult.error(alipayTradePagePayResponse.getBody());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("电脑网站生成订单串异常", e);
+            return AjaxResult.error(e.getMessage());
+        }
+    }
+
+    /**
+     * 手机网站
+     *
+     * 生成交易表单，渲染后自动跳转支付宝网站引导用户完成支付
+     */
+    @PostMapping("/wapPay")
+    @RepeatSubmit
+    public AjaxResult wapPay(@RequestBody @Valid AliPayInfo payInfo) {
+        try {
+            AlipayTradeWapPayResponse alipayTradeWapPayResponse = alipayService.getAlipayTradeWapPayResponse(payInfo);
+            if (ResponseChecker.success(alipayTradeWapPayResponse)) {
+                return AjaxResult.success("手机网站生成订单串成功", alipayTradeWapPayResponse.getBody());
+            } else {
+                log.error("手机网站生成订单串失败{}",alipayTradeWapPayResponse.getBody());
+                return AjaxResult.error(alipayTradeWapPayResponse.getBody());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("手机网站生成订单串异常", e);
+            return AjaxResult.error(e.getMessage());
+        }
+    }
+
 }

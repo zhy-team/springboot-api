@@ -1,8 +1,11 @@
 package com.payment.alipay.service.impl;
 
+import com.alipay.easysdk.payment.common.models.AlipayTradeFastpayRefundQueryResponse;
 import com.alipay.easysdk.payment.common.models.AlipayTradeQueryResponse;
+import com.alipay.easysdk.payment.common.models.AlipayTradeRefundResponse;
 import com.payment.alipay.bean.AliPayCommonInfo;
 import com.payment.alipay.service.AliCommonService;
+import com.payment.utils.PayUtils;
 import org.springframework.stereotype.Service;
 import com.alipay.easysdk.factory.Factory;
 
@@ -16,7 +19,23 @@ public class AliCommonServiceImpl implements AliCommonService {
 
     @Override
     public AlipayTradeQueryResponse getAlipayTradeQueryResponse(AliPayCommonInfo aliPayCommonInfo) throws Exception {
-        return Factory.Payment.Common().query(aliPayCommonInfo.getOutTradeNo());
+        com.alipay.easysdk.payment.common.Client client = Factory.Payment.Common();
+        client = (com.alipay.easysdk.payment.common.Client)PayUtils.getClient(client,aliPayCommonInfo.getObjectMap());
+        return client.query(aliPayCommonInfo.getOutTradeNo());
+    }
+
+    @Override
+    public AlipayTradeRefundResponse getAlipayTradeRefundResponse(AliPayCommonInfo aliPayCommonInfo) throws Exception {
+        com.alipay.easysdk.payment.common.Client client = Factory.Payment.Common();
+        client = (com.alipay.easysdk.payment.common.Client)PayUtils.getClient(client,aliPayCommonInfo.getObjectMap());
+        return client.refund(aliPayCommonInfo.getOutTradeNo(),aliPayCommonInfo.getRefundAmount());
+    }
+
+    @Override
+    public AlipayTradeFastpayRefundQueryResponse getAlipayTradeFastpayRefundQueryResponse(AliPayCommonInfo aliPayCommonInfo) throws Exception {
+        com.alipay.easysdk.payment.common.Client client = Factory.Payment.Common();
+        client = (com.alipay.easysdk.payment.common.Client)PayUtils.getClient(client,aliPayCommonInfo.getObjectMap());
+        return client.queryRefund(aliPayCommonInfo.getOutTradeNo(),aliPayCommonInfo.getOutRequestNo());
     }
 
 }

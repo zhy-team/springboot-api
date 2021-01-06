@@ -54,7 +54,7 @@ public class AliPayController {
                 log.debug("支付宝交易号{}", alipayTradeCreateResponse.getTradeNo());
                 //商户订单号
                 log.debug("商户订单号{}", alipayTradeCreateResponse.getOutTradeNo());
-                return AjaxResult.success("创建交易成功", alipayTradeCreateResponse.toMap().toString());
+                return AjaxResult.success("支付宝创建交易成功", alipayTradeCreateResponse.toMap().toString());
             } else {
                 log.error("支付宝创建交易失败{},{},{},{}", alipayTradeCreateResponse.getCode(), alipayTradeCreateResponse.getMsg(), alipayTradeCreateResponse.getSubCode(), alipayTradeCreateResponse.getSubMsg());
                 return AjaxResult.error(alipayTradeCreateResponse.getSubMsg());
@@ -106,7 +106,7 @@ public class AliPayController {
         try {
             AlipayTradePayResponse alipayTradePayResponse = alipayService.getAlipayTradePayResponse(payInfo);
             if (ResponseChecker.success(alipayTradePayResponse)) {
-                return AjaxResult.success("付款码交易成功", alipayTradePayResponse.toMap().toString());
+                return AjaxResult.success("支付宝付款码交易成功", alipayTradePayResponse.toMap().toString());
             } else {
                 log.error("付款码交易失败{},{},{},{}", alipayTradePayResponse.getCode(), alipayTradePayResponse.getMsg(), alipayTradePayResponse.getSubCode(), alipayTradePayResponse.getSubMsg());
                 return AjaxResult.error(alipayTradePayResponse.getSubMsg());
@@ -129,7 +129,7 @@ public class AliPayController {
         try {
             AlipayTradeAppPayResponse alipayTradeAppPayResponse = alipayService.getAlipayTradeAppPayResponse(payInfo);
             if (ResponseChecker.success(alipayTradeAppPayResponse)) {
-                return AjaxResult.success("app生成订单串成功", alipayTradeAppPayResponse.getBody());
+                return AjaxResult.success("支付宝app生成订单串成功", alipayTradeAppPayResponse.getBody());
             } else {
                 log.error("app生成订单串失败{}",alipayTradeAppPayResponse.getBody());
                 return AjaxResult.error(alipayTradeAppPayResponse.getBody());
@@ -152,7 +152,7 @@ public class AliPayController {
         try {
             AlipayTradePagePayResponse alipayTradePagePayResponse = alipayService.getAlipayTradePagePayResponse(payInfo);
             if (ResponseChecker.success(alipayTradePagePayResponse)) {
-                return AjaxResult.success("电脑网站生成订单串成功", alipayTradePagePayResponse.getBody());
+                return AjaxResult.success("支付宝电脑网站生成订单串成功", alipayTradePagePayResponse.getBody());
             } else {
                 log.error("电脑网站生成订单串失败{}",alipayTradePagePayResponse.getBody());
                 return AjaxResult.error(alipayTradePagePayResponse.getBody());
@@ -175,7 +175,7 @@ public class AliPayController {
         try {
             AlipayTradeWapPayResponse alipayTradeWapPayResponse = alipayService.getAlipayTradeWapPayResponse(payInfo);
             if (ResponseChecker.success(alipayTradeWapPayResponse)) {
-                return AjaxResult.success("手机网站生成订单串成功", alipayTradeWapPayResponse.getBody());
+                return AjaxResult.success("支付宝手机网站生成订单串成功", alipayTradeWapPayResponse.getBody());
             } else {
                 log.error("手机网站生成订单串失败{}",alipayTradeWapPayResponse.getBody());
                 return AjaxResult.error(alipayTradeWapPayResponse.getBody());

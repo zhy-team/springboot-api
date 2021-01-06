@@ -12,6 +12,8 @@ public class Main {
 
     /***
      *
+     * 文档地址:https://opendocs.alipay.com/open/54/00y8k9
+     *
      * List<Object> goodsDetailList = new ArrayList<>();
      * Map<String, Object> goodsDetail = new HashMap<>();
      * goodsDetail.put("goods_id", "apple-01");

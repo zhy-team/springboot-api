@@ -27,7 +27,7 @@ import java.util.Map;
  */
 
 @RestController
-@RequestMapping("/payment/alipay/pay/callBack")
+@RequestMapping("/payment/alipay/callBack")
 public class AliPayCallBackController {
     private static final Logger logger = LoggerFactory.getLogger("ali_pay");
 

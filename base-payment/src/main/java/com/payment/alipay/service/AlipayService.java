@@ -1,7 +1,10 @@
 package com.payment.alipay.service;
 
+import com.alipay.easysdk.payment.common.models.AlipayTradeCreateResponse;
 import com.alipay.easysdk.payment.facetoface.models.AlipayTradePrecreateResponse;
 import com.payment.alipay.bean.AliPayInfo;
+
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * @Author: zhanghuiyu
@@ -17,4 +20,9 @@ public interface AlipayService {
      * 生成交易付款码，待用户扫码付款
      */
     AlipayTradePrecreateResponse getAlipayTradePrecreateResponse(AliPayInfo aliPayInfo) throws Exception;
+
+    /**
+     * 通用创建交易
+     */
+    AlipayTradeCreateResponse getAlipayTradeCreateResponse(AliPayInfo payInfo) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, Exception;
 }

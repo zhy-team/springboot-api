@@ -2,6 +2,8 @@ package com.payment.alipay.bean;
 
 import lombok.Data;
 
+import javax.validation.constraints.Size;
+
 /**
  * @Author: zhanghuiyu
  * @Description:
@@ -11,7 +13,9 @@ import lombok.Data;
 @Data
 public class AliOauthInfo {
 
+    @Size(min = 1,max = 40,message = "code长度不合法")
     private String code;
 
+    @Size(min = 1,max = 40,message = "refreshToken长度不合法")
     private String refreshToken;
 }

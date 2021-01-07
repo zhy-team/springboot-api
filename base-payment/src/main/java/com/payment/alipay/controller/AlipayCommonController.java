@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +20,7 @@ import javax.validation.Valid;
 
 /**
  * @Author: zhanghuiyu
- * @Description:
+ * @Description: 支付宝通用类
  * @Date: create in 2021/1/6 13:25
  */
 @RestController
@@ -36,7 +37,7 @@ public class AlipayCommonController {
      */
     @PostMapping("/query")
     @RepeatSubmit
-    public AjaxResult query(@Valid AliPayCommonInfo aliPayCommonInfo) {
+    public AjaxResult query(@RequestBody @Valid AliPayCommonInfo aliPayCommonInfo) {
         try {
             AlipayTradeQueryResponse alipayTradeQueryResponse = aliCommonService.getAlipayTradeQueryResponse(aliPayCommonInfo);
             if (ResponseChecker.success(alipayTradeQueryResponse)) {
@@ -59,7 +60,7 @@ public class AlipayCommonController {
      */
     @PostMapping("/refund")
     @RepeatSubmit
-    public AjaxResult refund(@Valid AliPayCommonInfo aliPayCommonInfo) {
+    public AjaxResult refund(@RequestBody @Valid AliPayCommonInfo aliPayCommonInfo) {
         try {
             AlipayTradeRefundResponse alipayTradeRefundResponse = aliCommonService.getAlipayTradeRefundResponse(aliPayCommonInfo);
             if (ResponseChecker.success(alipayTradeRefundResponse)) {
@@ -81,7 +82,7 @@ public class AlipayCommonController {
      */
     @PostMapping("/queryRefund")
     @RepeatSubmit
-    public AjaxResult queryRefund(@Valid AliPayCommonInfo aliPayCommonInfo) {
+    public AjaxResult queryRefund(@RequestBody @Valid AliPayCommonInfo aliPayCommonInfo) {
         try {
             AlipayTradeFastpayRefundQueryResponse alipayTradeFastpayRefundQueryResponse = aliCommonService.getAlipayTradeFastpayRefundQueryResponse(aliPayCommonInfo);
             if (ResponseChecker.success(alipayTradeFastpayRefundQueryResponse)) {
@@ -104,7 +105,7 @@ public class AlipayCommonController {
      */
     @PostMapping("/cancel")
     @RepeatSubmit
-    public AjaxResult cancel(@Valid AliPayCommonInfo aliPayCommonInfo) {
+    public AjaxResult cancel(@RequestBody @Valid AliPayCommonInfo aliPayCommonInfo) {
         try {
             AlipayTradeCancelResponse alipayTradeCancelResponse = aliCommonService.getAlipayTradeCancelResponse(aliPayCommonInfo);
             if (ResponseChecker.success(alipayTradeCancelResponse)) {
@@ -127,7 +128,7 @@ public class AlipayCommonController {
      */
     @PostMapping("/close")
     @RepeatSubmit
-    public AjaxResult close(@Valid AliPayCommonInfo aliPayCommonInfo) {
+    public AjaxResult close(@RequestBody @Valid AliPayCommonInfo aliPayCommonInfo) {
         try {
             AlipayTradeCloseResponse alipayTradeCloseResponse = aliCommonService.getAlipayTradeCloseResponse(aliPayCommonInfo);
             if (ResponseChecker.success(alipayTradeCloseResponse)) {

@@ -27,7 +27,7 @@ import javax.validation.Valid;
 
 /**
  * @Author: zhanghuiyu
- * @Description:
+ * @Description: 支付宝交易类
  * @Date: create in 2021/1/4 14:53
  */
 
@@ -45,7 +45,7 @@ public class AliPayController {
      */
     @PostMapping("/createPay")
     @RepeatSubmit
-    public AjaxResult createPay(@Valid AliPayInfo payInfo) {
+    public AjaxResult createPay(@RequestBody @Valid AliPayInfo payInfo) {
 
         try {
             AlipayTradeCreateResponse alipayTradeCreateResponse = alipayService.getAlipayTradeCreateResponse(payInfo);

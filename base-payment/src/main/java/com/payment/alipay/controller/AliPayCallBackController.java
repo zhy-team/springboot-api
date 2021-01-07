@@ -22,7 +22,7 @@ import java.util.Map;
 
 /**
  * @Author: zhanghuiyu
- * @Description:
+ * @Description: 支付宝异步通知
  * @Date: create in 2021/1/6 12:52
  */
 

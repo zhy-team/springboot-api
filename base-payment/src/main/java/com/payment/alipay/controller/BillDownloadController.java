@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,7 +34,7 @@ public class BillDownloadController {
 
     @GetMapping("/downloadBill")
     @RepeatSubmit
-    public AjaxResult downloadBill(@Valid AliPayBillInfo billInfo) {
+    public AjaxResult downloadBill(@RequestBody @Valid AliPayBillInfo billInfo) {
         //账单日期格式：yyyy-MM-dd
         try {
             //billType: trade、signcustomer；trade指商户基于支付宝交易收单的业务账单；signcustomer是指基于商户支付宝余额收入及支出等资金变动的帐务账单。

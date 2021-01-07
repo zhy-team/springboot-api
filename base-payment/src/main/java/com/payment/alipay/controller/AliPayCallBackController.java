@@ -7,6 +7,8 @@ import com.alipay.easysdk.payment.common.models.AlipayTradeQueryResponse;
 import com.payment.alipay.bean.AliPayCommonInfo;
 import com.payment.alipay.config.Contants;
 import com.payment.alipay.service.AliCommonService;
+import com.ruoyi.common.annotation.Log;
+import com.ruoyi.common.enums.BusinessType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +35,9 @@ public class AliPayCallBackController {
 
     @Autowired
     AliCommonService aliCommonService;
+
     @PostMapping("/callbackPay")
+    @Log(title = "支付宝异步通知", businessType = BusinessType.OTHER)
     public void callbackPay(HttpServletRequest req, HttpServletResponse resp) {
         // 获取支付宝POST过来反馈信息
         Map<String, String> params = new HashMap<String, String>();

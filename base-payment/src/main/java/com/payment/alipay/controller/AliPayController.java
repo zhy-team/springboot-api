@@ -12,8 +12,10 @@ import com.alipay.easysdk.payment.wap.models.AlipayTradeWapPayResponse;
 import com.payment.alipay.bean.AliPayInfo;
 import com.payment.alipay.service.AlipayService;
 import com.payment.utils.PayUtils;
+import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.annotation.RepeatSubmit;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.enums.BusinessType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,6 +47,7 @@ public class AliPayController {
      */
     @PostMapping("/createPay")
     @RepeatSubmit
+    @Log(title = "支付宝创建交易", businessType = BusinessType.OTHER)
     public AjaxResult createPay(@RequestBody @Valid AliPayInfo payInfo) {
 
         try {
@@ -76,6 +79,7 @@ public class AliPayController {
      */
     @PostMapping("/faceToFacePrecreate")
     @RepeatSubmit
+    @Log(title = "支付宝当面付生成交易付款码", businessType = BusinessType.OTHER)
     public AjaxResult faceToFacePrecreate(@RequestBody @Valid AliPayInfo payInfo) {
 
         try {
@@ -102,6 +106,7 @@ public class AliPayController {
      */
     @PostMapping("/faceToFacePay")
     @RepeatSubmit
+    @Log(title = "支付宝付款码交易", businessType = BusinessType.OTHER)
     public AjaxResult faceToFacePay(@RequestBody @Valid AliPayInfo payInfo) {
         try {
             AlipayTradePayResponse alipayTradePayResponse = alipayService.getAlipayTradePayResponse(payInfo);
@@ -125,6 +130,7 @@ public class AliPayController {
      */
     @PostMapping("/appPay")
     @RepeatSubmit
+    @Log(title = "支付宝app生成订单串", businessType = BusinessType.OTHER)
     public AjaxResult appPay(@RequestBody @Valid AliPayInfo payInfo) {
         try {
             AlipayTradeAppPayResponse alipayTradeAppPayResponse = alipayService.getAlipayTradeAppPayResponse(payInfo);
@@ -148,6 +154,7 @@ public class AliPayController {
      */
     @PostMapping("/webPay")
     @RepeatSubmit
+    @Log(title = "支付宝电脑网站生成订单串", businessType = BusinessType.OTHER)
     public AjaxResult webPay(@RequestBody @Valid AliPayInfo payInfo) {
         try {
             AlipayTradePagePayResponse alipayTradePagePayResponse = alipayService.getAlipayTradePagePayResponse(payInfo);
@@ -171,6 +178,7 @@ public class AliPayController {
      */
     @PostMapping("/wapPay")
     @RepeatSubmit
+    @Log(title = "支付宝手机网站生成订单串", businessType = BusinessType.OTHER)
     public AjaxResult wapPay(@RequestBody @Valid AliPayInfo payInfo) {
         try {
             AlipayTradeWapPayResponse alipayTradeWapPayResponse = alipayService.getAlipayTradeWapPayResponse(payInfo);
@@ -193,6 +201,7 @@ public class AliPayController {
      */
     @PostMapping("/huaBei")
     @RepeatSubmit
+    @Log(title = "支付宝创建花呗分期交易", businessType = BusinessType.OTHER)
     public AjaxResult huaBei(@RequestBody @Valid AliPayInfo payInfo) {
         try {
 

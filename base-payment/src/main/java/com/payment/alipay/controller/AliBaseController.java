@@ -12,8 +12,10 @@ import com.alipay.easysdk.payment.common.models.AlipayTradeCreateResponse;
 import com.alipay.easysdk.util.generic.models.AlipayOpenApiGenericResponse;
 import com.payment.alipay.bean.*;
 import com.payment.alipay.service.AliBaseService;
+import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.annotation.RepeatSubmit;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.enums.BusinessType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +64,7 @@ public class AliBaseController {
      */
     @PostMapping("/Generic/execute")
     @RepeatSubmit
+    @Log(title = "支付宝通用接口", businessType = BusinessType.OTHER)
     public AjaxResult execute(@RequestBody @Valid AliGenericInfo aliGenericInfo) {
         try {
             AlipayOpenApiGenericResponse execute = Factory.Util.Generic().execute(aliGenericInfo.getMethod(), aliGenericInfo.getTextParams(), aliGenericInfo.getBizParams());
@@ -81,6 +84,7 @@ public class AliBaseController {
 
     @PostMapping("/OAuth/getToken")
     @RepeatSubmit
+    @Log(title = "支付宝获取授权访问令牌", businessType = BusinessType.OTHER)
     public AjaxResult getToken(@RequestBody @Valid AliOauthInfo aliOauthInfo) {
         try {
             AlipaySystemOauthTokenResponse alipaySystemOauthTokenResponse = aliBaseService.getAlipaySystemOauthTokenResponse(aliOauthInfo);
@@ -101,6 +105,7 @@ public class AliBaseController {
 
     @PostMapping("/OAuth/refreshToken")
     @RepeatSubmit
+    @Log(title = "支付宝刷新令牌", businessType = BusinessType.OTHER)
     public AjaxResult refreshToken(@RequestBody @Valid AliOauthInfo aliOauthInfo) {
         try {
             AlipaySystemOauthTokenResponse alipaySystemOauthTokenResponse = aliBaseService.refreshTokenResponse(aliOauthInfo);
@@ -120,6 +125,7 @@ public class AliBaseController {
 
     @PostMapping("/Qrcode/create")
     @RepeatSubmit
+    @Log(title = "支付宝生成小程序二维码", businessType = BusinessType.OTHER)
     public AjaxResult QrcodeCreate(@RequestBody @Valid AliAppQrcode aliAppQrcode) {
         try {
             AlipayOpenAppQrcodeCreateResponse alipayOpenAppQrcodeCreateResponse = aliBaseService.getAlipayOpenAppQrcodeCreateResponse(aliAppQrcode);
@@ -138,6 +144,7 @@ public class AliBaseController {
 
     @PostMapping("/Image/upload")
     @RepeatSubmit
+    @Log(title = "支付宝上传图片", businessType = BusinessType.OTHER)
     public AjaxResult ImageUpload(@RequestBody @Valid AliImagesInfo aliImagesInfo) {
         try {
             com.alipay.easysdk.base.image.models.AlipayOfflineMaterialImageUploadResponse alipayOfflineMaterialImageUploadResponse=aliBaseService.uploadImage(aliImagesInfo);
@@ -156,6 +163,7 @@ public class AliBaseController {
 
     @PostMapping("/Video/upload")
     @RepeatSubmit
+    @Log(title = "支付宝上传视频图片", businessType = BusinessType.OTHER)
     public AjaxResult VideoUpload(@RequestBody @Valid AliVideoInfo aliVideoInfo) {
         try {
             com.alipay.easysdk.base.video.models.AlipayOfflineMaterialImageUploadResponse alipayOfflineMaterialImageUploadResponse = aliBaseService.uploadVideo(aliVideoInfo);

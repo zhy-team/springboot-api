@@ -6,8 +6,10 @@ import com.alipay.easysdk.payment.common.models.*;
 import com.payment.alipay.bean.AliPayCommonInfo;
 import com.payment.alipay.bean.AliPayInfo;
 import com.payment.alipay.service.AliCommonService;
+import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.annotation.RepeatSubmit;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.enums.BusinessType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,7 @@ public class AlipayCommonController {
      */
     @PostMapping("/query")
     @RepeatSubmit
+    @Log(title = "支付宝查询交易", businessType = BusinessType.OTHER)
     public AjaxResult query(@RequestBody @Valid AliPayCommonInfo aliPayCommonInfo) {
         try {
             AlipayTradeQueryResponse alipayTradeQueryResponse = aliCommonService.getAlipayTradeQueryResponse(aliPayCommonInfo);
@@ -60,6 +63,7 @@ public class AlipayCommonController {
      */
     @PostMapping("/refund")
     @RepeatSubmit
+    @Log(title = "支付宝退款", businessType = BusinessType.OTHER)
     public AjaxResult refund(@RequestBody @Valid AliPayCommonInfo aliPayCommonInfo) {
         try {
             AlipayTradeRefundResponse alipayTradeRefundResponse = aliCommonService.getAlipayTradeRefundResponse(aliPayCommonInfo);
@@ -82,6 +86,7 @@ public class AlipayCommonController {
      */
     @PostMapping("/queryRefund")
     @RepeatSubmit
+    @Log(title = "支付宝退款查询", businessType = BusinessType.OTHER)
     public AjaxResult queryRefund(@RequestBody @Valid AliPayCommonInfo aliPayCommonInfo) {
         try {
             AlipayTradeFastpayRefundQueryResponse alipayTradeFastpayRefundQueryResponse = aliCommonService.getAlipayTradeFastpayRefundQueryResponse(aliPayCommonInfo);
@@ -105,6 +110,7 @@ public class AlipayCommonController {
      */
     @PostMapping("/cancel")
     @RepeatSubmit
+    @Log(title = "支付宝撤销交易", businessType = BusinessType.OTHER)
     public AjaxResult cancel(@RequestBody @Valid AliPayCommonInfo aliPayCommonInfo) {
         try {
             AlipayTradeCancelResponse alipayTradeCancelResponse = aliCommonService.getAlipayTradeCancelResponse(aliPayCommonInfo);
@@ -128,6 +134,7 @@ public class AlipayCommonController {
      */
     @PostMapping("/close")
     @RepeatSubmit
+    @Log(title = "支付宝关闭交易", businessType = BusinessType.OTHER)
     public AjaxResult close(@RequestBody @Valid AliPayCommonInfo aliPayCommonInfo) {
         try {
             AlipayTradeCloseResponse alipayTradeCloseResponse = aliCommonService.getAlipayTradeCloseResponse(aliPayCommonInfo);

@@ -57,4 +57,10 @@ public interface AlipayService {
      * 生成交易表单，渲染后自动跳转支付宝网站引导用户完成支付
      */
     AlipayTradeWapPayResponse getAlipayTradeWapPayResponse(AliPayInfo payInfo) throws Exception;
+
+    /**
+     * 创建花呗分期交易
+     *
+     */
+    com.alipay.easysdk.payment.huabei.models.AlipayTradeCreateResponse getHuaBeiTrade(AliPayInfo payInfo) throws Exception;
 }

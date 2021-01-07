@@ -3,7 +3,6 @@ package com.payment.alipay.bean;
 import lombok.Data;
 
 import javax.validation.constraints.*;
-import java.math.BigDecimal;
 import java.util.Map;
 
 /**
@@ -37,4 +36,17 @@ public class AliPayInfo {
     private String quitUrl;
 
     private Map<String,Object> objectMap;
+
+    /**
+     * 花呗分期参数
+     * "extend_params":{"hb_fq_num":"3","hb_fq_seller_percent":"100"}
+     *
+     * hb_fq_num 代表花呗分期数，仅支持传入3、6、12，其他期数暂不支持，传入会报错。
+     *
+     * hb_fq_seller_percent 代表卖家承担收费比例，商家承担手续费传入100，用户承担手续费传入0，仅支持传入100、0两种，其他比例暂不支持，传入会报错。
+     */
+    //private String extend_params;
+    //代表花呗分期数
+    private String HbFqNum;
+    private String hb_fq_seller_percent;
 }

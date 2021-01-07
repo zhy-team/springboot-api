@@ -187,4 +187,27 @@ public class AliPayController {
         }
     }
 
+
+    /**
+     * 创建花呗分期交易
+     */
+    @PostMapping("/huaBei")
+    @RepeatSubmit
+    public AjaxResult huaBei(@RequestBody @Valid AliPayInfo payInfo) {
+        try {
+
+            com.alipay.easysdk.payment.huabei.models.AlipayTradeCreateResponse huaBeiTrade = alipayService.getHuaBeiTrade(payInfo);
+            if (ResponseChecker.success(huaBeiTrade)) {
+                return AjaxResult.success("支付宝创建花呗分期交易成功", huaBeiTrade.toMap().toString());
+            } else {
+                log.error("支付宝创建花呗分期交易失败{},{},{},{}", huaBeiTrade.getCode(), huaBeiTrade.getMsg(), huaBeiTrade.getSubCode(), huaBeiTrade.getSubMsg());
+                return AjaxResult.error(huaBeiTrade.getSubMsg());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("手机创建花呗分期交易异常", e);
+            return AjaxResult.error(e.getMessage());
+        }
+    }
+
 }

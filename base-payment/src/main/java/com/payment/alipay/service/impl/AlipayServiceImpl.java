@@ -5,6 +5,7 @@ import com.alipay.easysdk.payment.app.models.AlipayTradeAppPayResponse;
 import com.alipay.easysdk.payment.common.models.AlipayTradeCreateResponse;
 import com.alipay.easysdk.payment.facetoface.models.AlipayTradePayResponse;
 import com.alipay.easysdk.payment.facetoface.models.AlipayTradePrecreateResponse;
+import com.alipay.easysdk.payment.huabei.models.HuabeiConfig;
 import com.alipay.easysdk.payment.page.Client;
 import com.alipay.easysdk.payment.page.models.AlipayTradePagePayResponse;
 import com.alipay.easysdk.payment.wap.models.AlipayTradeWapPayResponse;
@@ -68,5 +69,13 @@ public class AlipayServiceImpl implements AlipayService {
 
     }
 
-
+    @Override
+    public com.alipay.easysdk.payment.huabei.models.AlipayTradeCreateResponse getHuaBeiTrade(AliPayInfo aliPayInfo) throws Exception {
+        com.alipay.easysdk.payment.huabei.Client client = Factory.Payment.Huabei();
+        client = (com.alipay.easysdk.payment.huabei.Client)PayUtils.getClient(client,aliPayInfo.getObjectMap());
+        HuabeiConfig huabeiConfig = new HuabeiConfig();
+        huabeiConfig.setHbFqNum(aliPayInfo.getHbFqNum());
+        huabeiConfig.setHbFqSellerPercent(aliPayInfo.getHb_fq_seller_percent());
+        return client.create(aliPayInfo.getSubject(),PayUtils.getNumberForPK(),aliPayInfo.getAmount(),aliPayInfo.getBuyerId(),huabeiConfig);
+    }
 }

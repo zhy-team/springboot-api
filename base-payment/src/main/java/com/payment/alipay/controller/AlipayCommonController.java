@@ -2,10 +2,7 @@ package com.payment.alipay.controller;
 
 import com.alipay.easysdk.factory.Factory;
 import com.alipay.easysdk.kernel.util.ResponseChecker;
-import com.alipay.easysdk.payment.common.models.AlipayTradeCreateResponse;
-import com.alipay.easysdk.payment.common.models.AlipayTradeFastpayRefundQueryResponse;
-import com.alipay.easysdk.payment.common.models.AlipayTradeQueryResponse;
-import com.alipay.easysdk.payment.common.models.AlipayTradeRefundResponse;
+import com.alipay.easysdk.payment.common.models.*;
 import com.payment.alipay.bean.AliPayCommonInfo;
 import com.payment.alipay.bean.AliPayInfo;
 import com.payment.alipay.service.AliCommonService;
@@ -102,5 +99,49 @@ public class AlipayCommonController {
     }
 
 
+    /**
+     * 撤销交易
+     */
+    @PostMapping("/cancel")
+    @RepeatSubmit
+    public AjaxResult cancel(@Valid AliPayCommonInfo aliPayCommonInfo) {
+        try {
+            AlipayTradeCancelResponse alipayTradeCancelResponse = aliCommonService.getAlipayTradeCancelResponse(aliPayCommonInfo);
+            if (ResponseChecker.success(alipayTradeCancelResponse)) {
+                return AjaxResult.success("支付宝撤销交易成功", alipayTradeCancelResponse.toMap().toString());
+            } else {
+                log.error("支付宝撤销交易失败{},{},{},{}", alipayTradeCancelResponse.getCode(), alipayTradeCancelResponse.getMsg(), alipayTradeCancelResponse.getSubCode(), alipayTradeCancelResponse.getSubMsg());
+                return AjaxResult.error(alipayTradeCancelResponse.getSubMsg());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("支付宝撤销交易异常", e);
+            return AjaxResult.error(e.getMessage());
+        }
+
+    }
+
+
+    /**
+     * 关闭交易
+     */
+    @PostMapping("/close")
+    @RepeatSubmit
+    public AjaxResult close(@Valid AliPayCommonInfo aliPayCommonInfo) {
+        try {
+            AlipayTradeCloseResponse alipayTradeCloseResponse = aliCommonService.getAlipayTradeCloseResponse(aliPayCommonInfo);
+            if (ResponseChecker.success(alipayTradeCloseResponse)) {
+                return AjaxResult.success("支付宝关闭交易成功", alipayTradeCloseResponse.toMap().toString());
+            } else {
+                log.error("支付宝关闭交易失败{},{},{},{}", alipayTradeCloseResponse.getCode(), alipayTradeCloseResponse.getMsg(), alipayTradeCloseResponse.getSubCode(), alipayTradeCloseResponse.getSubMsg());
+                return AjaxResult.error(alipayTradeCloseResponse.getSubMsg());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("支付宝关闭交易异常", e);
+            return AjaxResult.error(e.getMessage());
+        }
+
+    }
 
 }
